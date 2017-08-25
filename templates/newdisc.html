@@ -1,0 +1,64 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+    <div class="row divider green">
+        <div class="col-md-12"></div>
+    </div>
+    <div class="row banner menu">
+        <div class="col-md-11 col-md-offset-1 padding-none">
+            <h1>New Disc</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-1 padding-top">
+            <form action="#" method = "post">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type ="text" maxlength="50" class="form-control" name="name" placeholder="Name of the disc">
+
+                    <label for="description">Description:</label>
+                    <textarea class="form-control" maxlength="250" rows="3" name="description" placeholder="Description of the disc"></textarea>
+
+                    <label for="disc_type">Disc Type:</label>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="disc_type" id="putter" value="Putter">Putter
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="disc_type" id="midrange" value="Midrange">Midrange
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="disc_type" id="fairway" value="Fairway">Fairway Driver
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="disc_type" id="distance" value="Distance">Distance Driver
+                      </label>
+                    </div>
+                    <label for="speed">Speed</label>
+                    <input type="text" maxlength="10" name="speed" id="speed">
+                    <label for="glide">Glide</label>
+                    <input type="text" maxlength="10" name="glide" id="glide">
+                    <label for="turn">Turn</label>
+                    <input type="text" maxlength="10" name="turn" id="turn">
+                    <label for="fade">Fade</label>
+                    <input type="text" maxlength="10" name="fade" id="fade">
+                    </br>
+                    <button type="submit" class="btn btn-default" id="submit" type="submit">
+                    <span class="glyphicon glyphicon-glass" aria-hidden="true"></span>Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+    <div class="row divider blue">
+        <div class="col-md-12"></div>
+    </div>
+    <div class="row banner main">
+        <div class="col-md-1"></div>
+        <div class="col-md-11 padding-none">
+            <h1 id="allmanufacturers">All Manufacturers</h1>
+        </div>
+    </div>
+
+<div class = 'flash'>
+              {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+    <div class="row padding-top padding-bottom">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 padding-none">
+            <a href="{{url_for('newManufacturer')}}">
+                <button class="btn btn-default" id="new-manufacturer">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add New Manufacturer
+                </button>
+            </a>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    {% for manufacturer in manufacturers %}
+        <a href = "{{url_for('showDiscs', manufacturer_id = manufacturer.id)}}">
+            <div class="row">
+                <div class="col-md-1"></div>
+                    <div class="col-md-10 manufacturer-list">
+                        <h3>{{manufacturer.name}}</h3>
+                    </div>
+                <div class="col-md-1"></div>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock %}

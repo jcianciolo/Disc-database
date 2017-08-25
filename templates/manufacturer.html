@@ -1,0 +1,276 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+    <div class="row divider green">
+        <div class="col-md-12"></div>
+    </div>
+    <div class="row banner menu">
+        <div class="col-md-11 col-md-offset-1 padding-none">
+            <h1>{{ manufacturer.name }}
+            <figure class="creator">
+                <img src="{{ url_for('static', filename='blank_user.gif') }}">
+                <figcaption>{{creator.email}}</figcaption>
+            </figure>
+            </h1>
+
+        </div>
+    </div>
+
+<div class = 'flash'>
+              {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+    <div class="row padding-top padding-bottom">
+        <div class="col-md-1"></div>
+        <div class="col-md-11 padding-none">
+            <a href="{{url_for('editManufacturer', manufacturer_id = manufacturer.id )}}">
+                <button class="btn btn-default" id="edit-manufacturer">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Edit Manufacturer
+                </button>
+            </a>
+            <a href="{{url_for('newDisc', manufacturer_id = manufacturer.id )}}">
+                <button class="btn btn-default" id="new-disc">
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>Add New Disc
+                </button>
+            </a>
+                        <a href="{{url_for('deleteManufacturer', manufacturer_id = manufacturer.id )}}">
+                <button class="btn btn-default delete" id="delete-manufacturer">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete Manufacturer
+                </button>
+            </a>
+        </div>
+        <div class="col-md-7"></div>
+    </div>
+
+    {% if items !=[] %}
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <h2>Putters</h2>
+                    {% for disc in discs %}
+                        {% if disc.disc_type == 'Putter' %}
+                            <div class="disc">
+                                <h3>{{disc.name}}</h3>
+                                <p>{{disc.description}}</p>
+                                <p>Speed: {{disc.speed}}</p>
+                                <p>Glide: {{disc.glide}}</p>
+                                <p>Turn: {{disc.turn}}</p>
+                                <p>Fade: {{disc.fade}}</p>
+                                <a href='{{url_for('editDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}'>Edit</a> |
+                                <a href='{{url_for('deleteDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}'>Delete</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+            <div class="col-md-2">
+                <h2>Midrange</h2>
+                    {% for disc in discs %}
+                        {% if disc.disc_type == 'Midrange' %}
+                        <div class="disc">
+                            <h3>{{disc.name}}</h3>
+                            <p>{{disc.description}}</p>
+                            <p>Speed: {{disc.speed}}</p>
+                            <p>Glide: {{disc.glide}}</p>
+                            <p>Turn: {{disc.turn}}</p>
+                            <p>Fade: {{disc.fade}}</p>
+                            <a href='{{url_for('editDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}'>Edit</a> |
+                            <a href='{{url_for('deleteDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}'>Delete</a>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+            <div class="col-md-3">
+                <h2>Fairway Drivers</h2>
+                    {% for disc in discs %}
+                        {% if disc.disc_type == 'Fairway' %}
+                        <div class="disc">
+                            <h3>{{disc.name}}</h3>
+                            <p>{{disc.description}}</p>
+                            <p>Speed: {{disc.speed}}</p>
+                            <p>Glide: {{disc.glide}}</p>
+                            <p>Turn: {{disc.turn}}</p>
+                            <p>Fade: {{disc.fade}}</p>
+                            <a href='{{url_for('editDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}'>Edit</a> |
+                            <a href='{{url_for('deleteDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}'>Delete</a>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+            <div class="col-md-3">
+                <h2>Distance Drivers</h2>
+                    {% for disc in discs %}
+                        {% if disc.disc_type == 'Distance' %}
+                        <div class="disc">
+                            <h3>{{disc.name}}</h3>
+                            <p>{{disc.description}}</p>
+                            <p>Speed: {{disc.speed}}</p>
+                            <p>Glide: {{disc.glide}}</p>
+                            <p>Turn: {{disc.turn}}</p>
+                            <p>Fade: {{disc.fade}}</p>
+                            <a href='{{url_for('editDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}'>Edit</a> |
+                            <a href='{{url_for('deleteDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}'>Delete</a>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <html>
+
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <div class = 'pane'>
+        <h1>{{ manufacturer.name }}</h1>
+
+        {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% if items !=[] %}
+
+        <a href = "{{url_for('newDisc', manufacturer_id = manufacturer.id )}}">Create A New Disc</a>
+    </br></br>
+
+    <h2>Putt and Approach</h2>
+
+        {% for disc in discs %}
+        {% if disc.disc_type == 'putter' %}
+
+        <p>{{disc.name}}</p>
+
+
+        <p>{{disc.description}}</p>
+        <p>Speed: {{disc.speed}}</p>
+        <p>Glide: {{disc.glide}}</p>
+        <p>Turn: {{disc.turn}}</p>
+        <p>Fade: {{disc.fade}}</p>
+
+        <a href="{{url_for('editDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}" >Edit</a>
+    </br>
+    <a href="{{url_for('deleteDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}" >Delete</a>
+</br>
+</br>
+        {% endif %}
+
+        {% endfor %}
+
+
+
+        </br></br>
+
+    <h2>Midrange</h2>
+
+        {% for disc in discs %}
+        {% if disc.disc_type == 'midrange' %}
+
+        <p>{{disc.name}}</p>
+        <p>{{disc.description}}</p>
+        <p>Speed: {{disc.speed}}</p>
+        <p>Glide: {{disc.glide}}</p>
+        <p>Turn: {{disc.turn}}</p>
+        <p>Fade: {{disc.fade}}</p>
+
+        <a href="{{url_for('editDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}" >Edit</a>
+    </br>
+    <a href="{{url_for('deleteDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}" >Delete</a>
+</br>
+</br>
+        {% endif %}
+
+        {% endfor %}
+
+
+
+        </br></br>
+
+    <h2>Fairway Drivers</h2>
+
+        {% for disc in discs %}
+        {% if disc.disc_type == 'midrange' %}
+
+        <p>{{disc.name}}</p>
+        <p>{{disc.description}}</p>
+        <p>Speed: {{disc.speed}}</p>
+        <p>Glide: {{disc.glide}}</p>
+        <p>Turn: {{disc.turn}}</p>
+        <p>Fade: {{disc.fade}}</p>
+
+        <a href="{{url_for('editDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}" >Edit</a>
+
+    <a href="{{url_for('deleteDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}" >Delete</a>
+</br>
+</br>
+        {% endif %}
+
+        {% endfor %}
+
+
+
+        </br></br>
+
+    <h2>Distance Drivers</h2>
+
+        {% for disc in discs %}
+        {% if disc.disc_type == 'distance' %}
+
+        <p>{{disc.name}}</p>
+        <p>{{disc.description}}</p>
+        <p>Speed: {{disc.speed}}</p>
+        <p>Glide: {{disc.glide}}</p>
+        <p>Turn: {{disc.turn}}</p>
+        <p>Fade: {{disc.fade}}</p>
+        <a href="{{url_for('editDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}" >Edit</a>
+    </br>
+    <a href="{{url_for('deleteDisc', manufacturer_id = manufacturer.id, disc_id=disc.id ) }}" >Delete</a>
+</br>
+</br>
+{% endif %}
+
+        {% endfor %}
+
+
+
+        {% else %}
+        <p> You currently have no discs. <p>
+        <a href = "{{url_for('newDisc', manufacturer_id = manufacturer.id )}}">Add A New Disc</a>
+            {% endif %}
+</div>
+    </body>
+
+</html> -->

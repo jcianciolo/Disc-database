@@ -1,0 +1,110 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+    <div class="row divider green">
+        <div class="col-md-12"></div>
+    </div>
+    <div class="row banner menu">
+        <div class="col-md-11 col-md-offset-1 padding-none">
+            <h1>{{ manufacturer.name }}
+            <figure class="creator">
+                <img src="{{ creator.picture}}">
+                <figcaption>{{ creator.name }}</figcaption>
+            </figure>
+            </h1>
+
+        </div>
+    </div>
+    <div class="row padding-top padding-bottom">
+        <div class="col-md-1"></div>
+        <div class="col-md-11 padding-none">
+
+        </div>
+        <div class="col-md-7"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                             <li> <strong> {{ message }} </strong> </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    {% if discs !=[] %}
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                <h2>Putters</h2>
+                    {% for disc in discs %}
+                        {% if disc.disc_type == 'Putter' %}
+                            <div class="disc">
+                                <h3>{{disc.name}}</h3>
+                                <p>{{disc.description}}</p>
+                                <p>{{disc.speed}}</p>
+                                <p>{{disc.glide}}</p>
+                                <p>{{disc.turn}}</p>
+                                <p>{{disc.fade}}</p>
+
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+
+            <div class="col-md-4">
+                <h2>Midrange</h2>
+                    {% for disc in discs %}
+                        {% if disc.disc_type == 'Midrange' %}
+                            <div class="disc">
+                                <h3>{{disc.name}}</h3>
+                                <p>{{disc.description}}</p>
+                                <p>{{disc.speed}}</p>
+                                <p>{{disc.glide}}</p>
+                                <p>{{disc.turn}}</p>
+                                <p>{{disc.fade}}</p>
+
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+            <div class="col-md-3">
+
+                <h2>Fairway Drivers</h2>
+                    {% for disc in discs %}
+                        {% if disc.disc_type == 'Fairway' %}
+                            <div class="disc">
+                                <h3>{{disc.name}}</h3>
+                                <p>{{disc.description}}</p>
+                                <p>{{disc.speed}}</p>
+                                <p>{{disc.glide}}</p>
+                                <p>{{disc.turn}}</p>
+                                <p>{{disc.fade}}</p>
+
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+
+                <h2>Distance Drivers</h2>
+                    {% for disc in discs %}
+                        {% if disc.disc_type == 'Distance' %}
+                            <div class="disc">
+                                <h3>{{disc.name}}</h3>
+                                <p>{{disc.description}}</p>
+                                <p>{{disc.speed}}</p>
+                                <p>{{disc.glide}}</p>
+                                <p>{{disc.turn}}</p>
+                                <p>{{disc.fade}}</p>
+
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    {% endif %}
+{% endblock %}
