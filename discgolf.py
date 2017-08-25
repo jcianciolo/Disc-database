@@ -17,7 +17,7 @@ app = Flask(__name__)
 CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Disc Golf App"
 
-engine = create_engine('postgresql://grader:grader@52.38.7.112/discgolf')
+engine = create_engine('postgresql://grader:grader@localhost/discgolf')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
