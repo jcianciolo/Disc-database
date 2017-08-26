@@ -64,7 +64,7 @@ class Disc(Base):
         }
 
 
-engine = create_engine('sqlite:///discgolf.db')
+engine = create_engine('postgresql:///discgolf.db')
 
 
 Base.metadata.create_all(engine)
