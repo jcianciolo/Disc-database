@@ -14,10 +14,10 @@ from functools import wraps
 
 app = Flask(__name__)
 
-CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
+CLIENT_ID = json.loads(open(r'/var/www/DiscGolf/DiscGolf/client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Disc Golf App"
 
-engine = create_engine('postgresql://catalog:catalog@localhost/discgolf')
+engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -48,14 +48,11 @@ def fbconnect():
     access_token = request.data
     print "access token received %s " % access_token
 
-    app_id = json.loads(open('fb_client_secrets.json', 'r').read())[
+    app_id = json.loads(open(r'/var/www/DiscGolf/DiscGolf/fb_client_secrets.json', 'r').read())[
         'web']['app_id']
     app_secret = json.loads(
-        open('fb_client_secrets.json', 'r').read())['web']['app_secret']
-    url = 'https://graph.facebook.com/v2.8/oauth/access_token?grant_type=\
-           fb_exchange_token&client_id=%s&client_secret=%s&\
-           fb_exchange_token=%s' % (
-          app_id, app_secret, access_token)
+        open(r'/var/www/DiscGolf/DiscGolf/fb_client_secrets.json', 'r').read())['web']['app_secret']
+    url = 'https://graph.facebook.com/v2.8/oauth/access_token?grant_type=fb_exchange_token&client_id=%s&client_secret=%s&fb_exchange_token=%s'%(app_id,app_secret,access_token)
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
     data = json.loads(result)
@@ -79,8 +76,7 @@ def fbconnect():
     login_session['access_token'] = stored_token
 
     # Get user picture
-    url = 'https://graph.facebook.com/v2.8/me/picture?%s&redirect=\
-          0&height=200&width=200' % token
+    url = 'https://graph.facebook.com/v2.8/me/picture?%s&redirect=0&height=200&width=200' % token
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
     data = json.loads(result)
@@ -130,7 +126,7 @@ def gconnect():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets(r'/var/www/DiscGolf/DiscGolf/client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -318,9 +314,7 @@ def newManufacturer():
 def editManufacturer(manufacturer_id):
     editedManufacturer = session.query(Manufacturer).filter_by(id=manufacturer_id).one()
     if editedManufacturer.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized\
-         to edit this manufacturer. Please create your own manufacturer\
-          in order to edit.');}</script><body onload='myFunction()''>"
+        return "<script>function myFunction() {alert('You are not authorized to edit this manufacturer. Please create your own manufacturer in order to edit.');}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         if request.form['name']:
             editedManufacturer.name = request.form['name']
@@ -338,9 +332,7 @@ def editManufacturer(manufacturer_id):
 def deleteManufacturer(manufacturer_id):
     manufacturerToDelete = session.query(Manufacturer).filter_by(id=manufacturer_id).one()
     if manufacturerToDelete.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized\
-               to delete this manufacturer. Please create your own manufacturer\
-               in order to delete.');}</script><body onload='myFunction()''>"
+        return "<script>function myFunction() {alert('You are not authorized to delete this manufacturer. Please create your own manufacturer  in order to delete.');}</script><body onload='myFunction()''>"
     if request.method == 'POST':
         session.delete(manufacturerToDelete)
         flash('%s successfully deleted' % manufacturerToDelete.name)
