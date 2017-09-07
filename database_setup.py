@@ -64,7 +64,7 @@ class Disc(Base):
         }
 
 
-engine = create_engine('postgresql:///discgolf.db')
+engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
 
 
 Base.metadata.create_all(engine)
