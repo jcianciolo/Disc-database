@@ -24,7 +24,7 @@
     ubuntu$ sudo apt-get upgrade
     ubuntu$ sudo apt-get autoremove
     
-##### 5. Create "grader" user
+##### 5. Create `grader` user
     ubuntu$ sudo adduser grader
 - Set the password to `grader` for simplicity. 
 
