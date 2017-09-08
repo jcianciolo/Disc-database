@@ -258,6 +258,7 @@ http://52.34.251.145
 - [UbuntuTime](https://help.ubuntu.com/community/UbuntuTime)
 - [archlinux: SSH keys](https://wiki.archlinux.org/index.php/SSH_keys)
 - [Glances](https://pypi.python.org/pypi/Glances)
+- [AWS Lightsail Documentation](https://lightsail.aws.amazon.com/ls/docs/all)
 - [HTTPD - Apache2 Web Server](https://help.ubuntu.com/lts/serverguide/httpd.html)
 - [DigitalOcean: How To Set Up SSH Keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2)
 - [DigitalOcean: How To Configure the Apache Web Server on an Ubuntu or Debian VPS](https://www.digitalocean.com/community/tutorials/how-to-configure-the-apache-web-server-on-an-ubuntu-or-debian-vps)
